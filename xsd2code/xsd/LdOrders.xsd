@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="orders">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="order" minOccurs="1" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sourceCode">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:pattern value="[a-zA-Z0-9 ]*"/>
+                    <xs:length value="16" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="orderDate" type="xs:dateTime" minOccurs="0" maxOccurs="1" />
+              <xs:element name="affiliateOrderID" type="xs:string" minOccurs="0" maxOccurs="1"/>
+              <xs:element name="actions" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="customerHold" type="xs:boolean" />
+                    <xs:element name="reviewHold" minOccurs="0" maxOccurs="1">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="2" />
+                          <xs:pattern value="[a-zA-Z0-9 ]*"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="expedite" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="customers" minOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="customer" minOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="customerNumber" type="xs:unsignedByte" minOccurs="1" />
+                          <xs:element name="CustomerEDPNumber">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9]*" />
+                                <xs:maxLength value="16" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="address" minOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="firstName">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:pattern value="[a-zA-Z ]*" />
+                                      <xs:maxLength value="16" />
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="lastName">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:pattern value="[a-zA-Z ]*" />
+                                      <xs:maxLength value="16" />
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="company">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:pattern value="[a-zA-Z0-9 ]*"/>
+                                      <xs:maxLength value="30" />
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="line1" minOccurs="1">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:pattern value="^[0-9]+\s+([a-zA-Z\32-\151]+|[a-zA-Z\32-\151]+\s[a-zA-Z\32-\151]+)$"/>
+                                      <xs:maxLength value="30" />
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="line2">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:pattern value="[a-zA-Z0-9 ]*"/>
+                                      <xs:maxLength value="30" />
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="city" minOccurs="1">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:pattern value="[a-zA-Z ]*"/>
+                                      <xs:maxLength value="30" />
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="state" minOccurs="1">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:pattern value="[a-zA-Z ]*"/>
+                                      <xs:maxLength value="30" />
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="zipCode" minOccurs="1">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:pattern value="[0-9]*"/>
+                                      <xs:length value="5" />
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="customerphones">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element minOccurs="1" maxOccurs="2" name="customerphone">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute name="type" use="required">
+                                          <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                              <xs:enumeration value="Day" />
+                                              <xs:enumeration value="Night" />
+                                            </xs:restriction>
+                                          </xs:simpleType>
+                                        </xs:attribute>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element minOccurs="0" name="email">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+[0-9,a-z,A-Z,.,-]*(.){1}[a-zA-Z]{2,4})+$" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="type" use="required">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:enumeration value="Billing" />
+                              <xs:enumeration value="Shipping" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="lineItems" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="lineItem" minOccurs="1" maxOccurs="99">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element minOccurs="1" name="quantity" type="xs:integer" />
+                          <xs:element minOccurs="1" name="title" type="xs:string" />
+                          <xs:element minOccurs="1" name="prices" >
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="unitPrice" minOccurs="1" maxOccurs="3">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:decimal">
+                                        <xs:attribute name="type" use="required">
+                                          <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                              <xs:enumeration value="base" />
+                                              <xs:enumeration value="promo" />
+                                              <xs:enumeration value="actual" />
+                                            </xs:restriction>
+                                          </xs:simpleType>
+                                        </xs:attribute>
+                                        <xs:attribute name="description" use="optional" />
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Shipping" minOccurs="0" maxOccurs="1" type="xs:decimal"/>
+                                <xs:element name="Tax" minOccurs="0" maxOccurs="1" type="xs:decimal"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element minOccurs="1" name="shipMethod" type="xs:unsignedByte" />
+                          <xs:element name="shipTo">
+                            <xs:complexType>
+                              <xs:attribute name="customerNumber" type="xs:unsignedByte" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="item" use="required">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="[a-zA-Z0-9 ]*" />
+                              <xs:maxLength value="20" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="sequence" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="headerSequence" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="payments" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="payment" minOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="cardType" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:enumeration value="AX" />
+                                <xs:enumeration value="BL" />
+                                <xs:enumeration value="DI" />
+                                <xs:enumeration value="MC" />
+                                <xs:enumeration value="VI" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="cardNumber" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13})" />
+                                <xs:maxLength value="16" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="cardExpYY" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9]*" />
+                                <xs:maxLength value="2" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="cardExpMM" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9]*" />
+                                <xs:maxLength value="2" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="cardCSV" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9]*" />
+                                <xs:minLength value="3" />
+                                <xs:maxLength value="4" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="cardAuthCode" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9A-Z]*" />
+                                <xs:maxLength value="7" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="cardResponseCode" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9]*" />
+                                <xs:maxLength value="4" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="birthday" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$" />
+                                <xs:length value="10" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="promoCode" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9]*" />
+                                <xs:maxLength value="4" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="division" minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9]*" />
+                                <xs:maxLength value="6" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="poNumber" type="xs:string"  minOccurs="0" maxOccurs="1" />
+                          <xs:element name="source"  minOccurs="0" maxOccurs="1">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:enumeration value="AZ" />
+                                <xs:enumeration value="BC" />
+                                <xs:enumeration value="EG" />
+                                <xs:enumeration value="MA" />
+                                <xs:enumeration value="PA" />
+                                <xs:enumeration value="OS" />
+                                <xs:enumeration value="SS" />
+                                <xs:enumeration value="BU" />
+                                <xs:enumeration value="WM" />
+                                <xs:enumeration value="BB" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="remitAmount" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+                        </xs:sequence>
+                        <xs:attribute name="type" use="required">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:enumeration value="BL" />
+                              <xs:enumeration value="CC" />
+                              <xs:enumeration value="OA" />
+                              <xs:enumeration value="PP" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="encrypted" type="xs:boolean" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="discounts" maxOccurs="1" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="discountCode1">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="1" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="discountCode2">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="1" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="giftMessage" maxOccurs="1" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="line1">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="60" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="line2">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="60" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="shippingComments" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="line1">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="60" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="line2">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="60" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="order-type">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="Affiliate" />
+                  <xs:enumeration value="Phone" />
+                  <xs:enumeration value="Web" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="order-id">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="^[A-Z][0-9]{7}" />
+                  <xs:maxLength value="8" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

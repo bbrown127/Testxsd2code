@@ -8,5 +8,13 @@ namespace xsd2code
 {
     public class Class1
     {
+
+        public static void Main(string[] args)
+        {
+            
+
+
+        }
+
     }
 }

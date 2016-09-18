@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>0c161bc4-ce3a-4075-8e61-959138afc639</ProjectGuid>
+    <ProjectGuid>{0C161BC4-CE3A-4075-8E61-959138AFC639}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>xsd2code</RootNamespace>
@@ -30,24 +30,47 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="xsd\LdOrders.Designer.cs" />
+    <Compile Include="xsd\orders.cs" />
+    <Compile Include="xsd\ordersOrder.cs" />
+    <Compile Include="xsd\ordersOrderActions.cs" />
+    <Compile Include="xsd\ordersOrderCustomer.cs" />
+    <Compile Include="xsd\ordersOrderCustomerAddress.cs" />
+    <Compile Include="xsd\ordersOrderCustomerCustomerphone.cs" />
+    <Compile Include="xsd\ordersOrderCustomerCustomerphoneType.cs" />
+    <Compile Include="xsd\ordersOrderCustomerType.cs" />
+    <Compile Include="xsd\ordersOrderDiscounts.cs" />
+    <Compile Include="xsd\ordersOrderGiftMessage.cs" />
+    <Compile Include="xsd\ordersOrderLineItem.cs" />
+    <Compile Include="xsd\ordersOrderLineItemPrices.cs" />
+    <Compile Include="xsd\ordersOrderLineItemPricesUnitPrice.cs" />
+    <Compile Include="xsd\ordersOrderLineItemPricesUnitPriceType.cs" />
+    <Compile Include="xsd\ordersOrderLineItemShipTo.cs" />
+    <Compile Include="xsd\ordersOrderOrdertype.cs" />
+    <Compile Include="xsd\ordersOrderPayments.cs" />
+    <Compile Include="xsd\ordersOrderPaymentsPayment.cs" />
+    <Compile Include="xsd\ordersOrderPaymentsPaymentCardType.cs" />
+    <Compile Include="xsd\ordersOrderPaymentsPaymentSource.cs" />
+    <Compile Include="xsd\ordersOrderPaymentsPaymentType.cs" />
+    <Compile Include="xsd\ordersOrderShippingComments.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="xsd\LdOrders.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -57,5 +80,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-
- </Project>
+</Project>
